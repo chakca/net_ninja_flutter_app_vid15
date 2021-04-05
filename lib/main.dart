@@ -4,17 +4,57 @@ void main() => runApp(MaterialApp(
  home: NinjaCard(),
 ));
 
-class NinjaCard extends StatelessWidget {
+class NinjaCard extends StatefulWidget {
+  @override
+  _NinjaCardState createState() => _NinjaCardState();
+}
+
+class _NinjaCardState extends State<NinjaCard> {
+
+  int ninjaLevel =0;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.grey[900],
       appBar: AppBar(
-        title: Text('ID Card App stateless'),
+        title: Text('ID Card App stateless --> sttful'),
         centerTitle: true,
         backgroundColor: Colors.grey[850],
         elevation: 40.0, //drop shadow under title bar is removed
       ),
+        floatingActionButton: Row(
+          children: <Widget>[
+            Expanded(
+              flex: 3,
+              child: FloatingActionButton(
+                onPressed: (){
+                  setState(() {
+                    ninjaLevel += 10;
+                  });
+                },
+                backgroundColor: Colors.grey[700],
+                child: Container(
+                  child: Icon(Icons.plus_one),
+                ),
+              ),
+            ),
+            Expanded(
+              flex: 2,
+              child: FloatingActionButton(
+                onPressed: (){
+                    setState(() {
+                      ninjaLevel -= 10;
+                    });
+                  },
+                backgroundColor: Colors.grey[700],
+                child: Container(
+                  child: Icon(Icons.exposure_minus_1),
+                ),
+              ),
+            ),
+          ],
+        ),
         body: Padding(
         padding: EdgeInsets.fromLTRB(30, 40, 30, 0),
         child: Column(
@@ -51,7 +91,7 @@ class NinjaCard extends StatelessWidget {
             ),
             SizedBox(height: 30,),
             Text(
-              'Current Ninja Level',
+              'Current Ninja Ratings',
               style: TextStyle(
                 color: Colors.grey,
                 //backgroundColor: Colors.amberAccent,
@@ -60,7 +100,8 @@ class NinjaCard extends StatelessWidget {
             ),
             SizedBox(height: 10.0,),
             Text(
-              '8',
+            //  '8',
+              '$ninjaLevel',
               style: TextStyle(
                 color: Colors.amberAccent[200],
                 //backgroundColor: Colors.amberAccent,
@@ -93,3 +134,4 @@ class NinjaCard extends StatelessWidget {
     );
   }
 }
+
